@@ -55,3 +55,13 @@ jobs:
           java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandContractTest
           java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SimulatedSystemUiAdapterTest
           java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandSystemUiIntegrationTest
+
+      - name: Compile Kotlin SystemUI bridge against lightweight stubs (not full Soong)
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 -o /tmp/kotlin-compiler.zip https://github.com/JetBrains/kotlin/releases/download/v2.4.21/kotlin-compiler-2.4.21.zip
+          echo '7cc140e76daf416a0424a5557f99afd7ca89ebd463ea1101261e3e01c33e75cd  /tmp/kotlin-compiler.zip' | sha256sum -c -
+          mkdir -p /tmp/originpixel-kotlin
+          unzip -q /tmp/kotlin-compiler.zip -d /tmp/originpixel-kotlin
+          rm -f /tmp/kotlin-compiler.zip
+          PATH="/tmp/originpixel-kotlin/kotlinc/bin:$PATH" bash scripts/compile-kotlin-bridge-stubs.sh
