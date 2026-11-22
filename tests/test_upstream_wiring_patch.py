@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static verification tests for LineageOS 24.0 SystemUI wiring patch & fail-closed gates."""
+"""Static verification tests for hardened LineageOS 24.0 SystemUI wiring bridge & fail-closed gates."""
 import json
 from pathlib import Path
 
@@ -9,21 +9,45 @@ OVERLAY_MK = ROOT / "overlays/originpixel_mustang_overlay.mk"
 OVERLAY_MAP = ROOT / "overlays/design-tokens/overlayable-map.json"
 
 
-def test_bridge_uses_verified_apis_only():
+def test_bridge_uses_verified_apis_and_balanced_lifecycle():
     src = BRIDGE_KT.read_text(encoding="utf-8")
-    required_imports = [
+
+    # Verified upstream & DI imports
+    for token in [
+        "com.android.systemui.dagger.SysUISingleton",
+        "javax.inject.Inject",
+        "@SysUISingleton",
+        "@Inject constructor",
         "com.android.systemui.statusbar.notification.collection.NotifPipeline",
         "com.android.systemui.media.controls.domain.pipeline.MediaDataManager",
         "com.android.systemui.privacy.PrivacyItemController",
         "com.android.systemui.statusbar.policy.KeyguardStateController",
-        "com.originpixel.systemui.smartisland.SmartIslandContract",
-        "com.originpixel.systemui.smartisland.SmartIslandUiController",
-    ]
-    for imp in required_imports:
-        assert imp in src, f"Missing verified upstream/core import: {imp}"
+    ]:
+        assert token in src, f"Missing verified API/DI token: {token}"
 
-    forbidden = ["vivo", "originos", "Class.forName", "setAccessible(true)"]
-    for bad in forbidden:
+    # Balanced listener registration & removal (no callback leaks)
+    pairs = [
+        ("notifPipeline.addCollectionListener(", "notifPipeline.removeCollectionListener("),
+        ("mediaDataManager.addListener(", "mediaDataManager.removeListener("),
+        ("privacyItemController.addCallback(", "privacyItemController.removeCallback("),
+        ("keyguardStateController.addCallback(", "keyguardStateController.removeCallback("),
+    ]
+    for add_call, remove_call in pairs:
+        assert add_call in src, f"Missing registration: {add_call}"
+        assert remove_call in src, f"Missing cleanup/removal: {remove_call}"
+
+    # Notification updates & strict redaction (PRIVATE + SECRET)
+    assert "override fun onEntryAdded(" in src
+    assert "override fun onEntryUpdated(" in src
+    assert "override fun onEntryRemoved(" in src
+    assert "Notification.VISIBILITY_PRIVATE" in src
+    assert "Notification.VISIBILITY_SECRET" in src
+
+    # Idempotent start/stop guard
+    assert "if (started) return" in src
+    assert "if (!started) return" in src
+
+    for bad in ["vivo", "originos", "Class.forName", "setAccessible(true)"]:
         assert bad.lower() not in src.lower(), f"Forbidden pattern found: {bad}"
 
 
@@ -39,6 +63,6 @@ def test_fail_closed_rro_gates_preserved():
 
 
 if __name__ == "__main__":
-    test_bridge_uses_verified_apis_only()
+    test_bridge_uses_verified_apis_and_balanced_lifecycle()
     test_fail_closed_rro_gates_preserved()
-    print("ALL Upstream Wiring Patch & Fail-Closed Gate Tests PASSED (2/2)")
+    print("ALL Hardened Upstream Wiring Bridge & Fail-Closed Gate Tests PASSED (2/2)")
