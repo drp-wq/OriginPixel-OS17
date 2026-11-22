@@ -39,6 +39,7 @@ jobs:
           python3 tests/test_g3_inspector.py
           python3 -m pip install --user --disable-pip-version-check PyYAML==6.0.2
           python3 tests/test_ci_smoke.py
+          python3 tests/test_upstream_wiring_patch.py
 
       - name: Compile and run ALL SmartIsland modules & integration test suites
         run: |
