@@ -7,9 +7,9 @@ permissions:
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, ci/source-only-validation ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, ci/source-only-validation ]
 
 jobs:
   unit-and-schema-tests:
