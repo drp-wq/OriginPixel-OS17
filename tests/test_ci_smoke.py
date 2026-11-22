@@ -16,6 +16,15 @@ def test_ci_workflow_security_and_structure():
     job = data["jobs"]["unit-and-schema-tests"]
     assert job.get("timeout-minutes", 999) <= 15, "CI job must have a strict timeout <= 15 min"
 
+    run_text = "\n".join(step.get("run", "") for step in job["steps"])
+    for required in [
+        "bash -n scripts/*.sh",
+        "tests/test_source_tree_security.py",
+        "scripts/compile-kotlin-bridge-stubs.sh",
+        "tests/test_offline_preflights.py",
+    ]:
+        assert required in run_text, f"CI workflow is missing required validation: {required}"
+
     for step in job["steps"]:
         if "uses" in step:
             ref = step["uses"].split("@", 1)[1].split()[0]

@@ -42,6 +42,17 @@ jobs:
           python3 tests/test_upstream_wiring_patch.py
           python3 tests/test_patch_apply_dryrun.py
 
+      - name: Validate shell syntax and sanitized source tree
+        run: |
+          bash -n scripts/*.sh
+          python3 tests/test_source_tree_security.py
+
+      - name: Compile Kotlin bridge against offline stubs
+        run: bash scripts/compile-kotlin-bridge-stubs.sh
+
+      - name: Run offline benchmark and release preflight checks
+        run: python3 tests/test_offline_preflights.py
+
       - name: Compile and run ALL SmartIsland modules & integration test suites
         run: |
           mkdir -p /tmp/op-ci-classes
