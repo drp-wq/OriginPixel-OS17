@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0.0",
+  "design_system": "OriginPixel OS 17 Original Design System",
+  "clean_room_attestation": "100% original tokens; zero proprietary vivo OriginOS assets, fonts, or code.",
+  "surfaces": {
+    "glass_low": { "blur_dp": 12, "alpha_light": 0.78, "alpha_dark": 0.72 },
+    "glass_medium": { "blur_dp": 24, "alpha_light": 0.68, "alpha_dark": 0.62 },
+    "glass_high": { "blur_dp": 36, "alpha_light": 0.58, "alpha_dark": 0.52 },
+    "reduced_transparency_fallback": { "blur_dp": 0, "alpha_light": 1.0, "alpha_dark": 1.0 }
+  },
+  "radii_dp": {
+    "pill": 999,
+    "sheet": 32,
+    "card": 24,
+    "tile": 18,
+    "chip": 12
+  },
+  "spacing_dp": {
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "xxl": 32
+  },
+  "typography": {
+    "font_family_primary": "sans-serif",
+    "display_sp": 32,
+    "headline_sp": 22,
+    "title_sp": 16,
+    "body_sp": 14,
+    "label_sp": 12
+  },
+  "motion": {
+    "spring_snappy": { "stiffness": 500.0, "damping_ratio": 0.82 },
+    "spring_fluid": { "stiffness": 320.0, "damping_ratio": 0.85 },
+    "spring_gentle": { "stiffness": 200.0, "damping_ratio": 0.90 },
+    "reduced_motion_crossfade_ms": 120
+  },
+  "accessibility": {
+    "min_contrast_body": 4.5,
+    "min_contrast_large": 3.0,
+    "min_touch_target_dp": 48
+  }
+}

@@ -1,0 +1,24 @@
+From: OriginPixel OS 17 <orchestrator@originpixel.local>
+Subject: [PATCH 1/1] SystemUI: link OriginPixelSmartIslandCore into SystemUI-core
+
+Verified against LineageOS/android_frameworks_base@lineage-24.0
+packages/SystemUI/Android.bp (lines 488-496).
+
+---
+ packages/SystemUI/Android.bp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/packages/SystemUI/Android.bp b/packages/SystemUI/Android.bp
+index 000000000000..111111111111 100644
+--- a/packages/SystemUI/Android.bp
++++ b/packages/SystemUI/Android.bp
+@@ -488,6 +488,7 @@ android_library {
+     static_libs: [
+         "//frameworks/libs/systemui:compilelib",
+         "com.android.systemui.bundle.phone_api",
++        "OriginPixelSmartIslandCore",
+         "SystemUI-res",
+         "WifiTrackerLib",
+         "WindowManager-Shell",
+-- 
+2.43.0

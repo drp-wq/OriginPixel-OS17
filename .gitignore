@@ -1,0 +1,38 @@
+# OriginPixel OS 17 — Security & Build Exclusions
+# Never commit secrets, signing keys, credentials, or large binary archives
+
+# Signing keys & credentials
+*.jks
+*.keystore
+*.pk8
+*.x509.pem
+*.pem
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+secrets/
+keys/
+signing-keys/
+
+# Local backups & archives
+backups-manifests/*.tar.gz
+backups-manifests/*.tar.zst
+backups-manifests/*.zip
+artifacts/*.zip
+artifacts/*.img
+artifacts/*.apk
+
+# Build & IDE caches
+out/
+build/
+.gradle/
+.idea/
+*.iml
+local.properties
+__pycache__/
+*.pyc
+.venv/
+tests/virtual-env/.venv/
+.DS_Store

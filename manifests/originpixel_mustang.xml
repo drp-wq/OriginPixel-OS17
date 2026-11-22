@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!--
+    OriginPixel OS 17 — LineageOS 24.0 Local Manifest for Google Pixel 10 Pro XL (mustang)
+    Verified against authoritative GitHub repositories on 2026-11-22.
+    Place in: <AOSP_ROOT>/.repo/local_manifests/originpixel_mustang.xml
+  -->
+  <project name="LineageOS/android_device_google_mustang"
+           path="device/google/mustang"
+           remote="github"
+           revision="lineage-24.0" />
+
+  <project name="LineageOS/android_device_google_muzel"
+           path="device/google/muzel"
+           remote="github"
+           revision="lineage-24.0" />
+
+  <project name="LineageOS/android_device_google_laguna"
+           path="device/google/laguna"
+           remote="github"
+           revision="lineage-24.0" />
+
+  <project name="LineageOS/android_device_google_muzel-kernels"
+           path="device/google/muzel-kernels"
+           remote="github"
+           revision="lineage-24.0" />
+
+  <project name="TheMuppets/proprietary_vendor_google_mustang"
+           path="vendor/google/mustang"
+           remote="github"
+           revision="lineage-24.0" />
+</manifest>

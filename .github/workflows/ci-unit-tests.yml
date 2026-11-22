@@ -1,0 +1,68 @@
+name: OriginPixel OS 17 — Lightweight Unit & Schema CI
+
+# Security: Least-privilege read-only token; no secrets required or exposed.
+# Status: Locally YAML-validated only; NOT PASSED until an actual hosted GitHub Actions run completes.
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  unit-and-schema-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository (pinned SHA, no persisted credentials)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up JDK 17 (pinned SHA)
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Verify runtime versions
+        run: |
+          java -version
+          python3 --version
+
+      - name: Validate XML manifests, L1 design tokens, G3 inspector & CI smoke
+        run: |
+          python3 -c "import xml.etree.ElementTree as ET; ET.parse('manifests/originpixel_mustang.xml')"
+          python3 tests/test_design_tokens.py
+          python3 tests/test_g3_inspector.py
+          python3 tests/test_ci_smoke.py
+          python3 tests/test_upstream_wiring_patch.py
+          python3 tests/test_patch_apply_dryrun.py
+
+      - name: Compile and run ALL SmartIsland modules & integration test suites
+        run: |
+          mkdir -p /tmp/op-ci-classes
+          javac -d /tmp/op-ci-classes \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandContract.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SimulatedSystemUiAdapter.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandMotionSpec.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandUiController.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SystemUiIntegrationBoundaries.java \
+            tests/SmartIslandContractTest.java \
+            tests/SimulatedSystemUiAdapterTest.java \
+            tests/SmartIslandSystemUiIntegrationTest.java
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandContractTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SimulatedSystemUiAdapterTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandSystemUiIntegrationTest
+          javac -d /tmp/op-ci-classes \
+            launcher/src/com/originpixel/launcher/LauncherState.java \
+            systemui/core/com/originpixel/systemui/core/SurfaceStateContract.java \
+            motion/src/com/originpixel/motion/SpringIntegrator.java \
+            tests/LauncherStateTest.java \
+            tests/SurfaceStateContractTest.java \
+            tests/SpringIntegratorTest.java
+          java -ea -cp /tmp/op-ci-classes com.originpixel.launcher.LauncherStateTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.core.SurfaceStateContractTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.motion.SpringIntegratorTest

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OriginPixel OS 17 — L1 Original Design System Tokens (Android Resource Overlay Spec)
+  Clean-room original tokens. Not yet bound to unverified SystemUI overlayable targets.
+-->
+<resources>
+    <!-- Typography scale uses Android's generic sans-serif family only. -->
+    <string name="op_font_family_primary">sans-serif</string>
+    <dimen name="op_text_display">32sp</dimen>
+    <dimen name="op_text_headline">22sp</dimen>
+    <dimen name="op_text_title">16sp</dimen>
+    <dimen name="op_text_body">14sp</dimen>
+    <dimen name="op_text_label">12sp</dimen>
+
+    <!-- Opaque defaults support reduced-transparency mode; blur remains opt-in. -->
+    <color name="op_surface_glass_low_light">#FFF2F4F8</color>
+    <color name="op_surface_glass_medium_light">#FFE8ECF2</color>
+    <color name="op_surface_glass_high_light">#FFDDE3EC</color>
+    <color name="op_surface_glass_low_dark">#FF20242B</color>
+    <color name="op_surface_glass_medium_dark">#FF292E37</color>
+    <color name="op_surface_glass_high_dark">#FF343B46</color>
+
+    <!-- Corner Radii -->
+    <dimen name="op_radius_pill">999dp</dimen>
+    <dimen name="op_radius_sheet">32dp</dimen>
+    <dimen name="op_radius_card">24dp</dimen>
+    <dimen name="op_radius_tile">18dp</dimen>
+    <dimen name="op_radius_chip">12dp</dimen>
+
+    <!-- Spatial Grid (4dp base) -->
+    <dimen name="op_space_xs">4dp</dimen>
+    <dimen name="op_space_sm">8dp</dimen>
+    <dimen name="op_space_md">12dp</dimen>
+    <dimen name="op_space_lg">16dp</dimen>
+    <dimen name="op_space_xl">24dp</dimen>
+    <dimen name="op_space_xxl">32dp</dimen>
+
+    <!-- Blur Radii -->
+    <dimen name="op_blur_glass_low">12dp</dimen>
+    <dimen name="op_blur_glass_medium">24dp</dimen>
+    <dimen name="op_blur_glass_high">36dp</dimen>
+
+    <!-- Accessibility -->
+    <dimen name="op_min_touch_target">48dp</dimen>
+    <integer name="op_reduced_motion_crossfade_ms">120</integer>
+</resources>
