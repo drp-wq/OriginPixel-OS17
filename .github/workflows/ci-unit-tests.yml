@@ -37,7 +37,6 @@ jobs:
           python3 -c "import xml.etree.ElementTree as ET; ET.parse('manifests/originpixel_mustang.xml')"
           python3 tests/test_design_tokens.py
           python3 tests/test_g3_inspector.py
-          python3 -m pip install --user --disable-pip-version-check PyYAML==6.0.2
           python3 tests/test_ci_smoke.py
           python3 tests/test_upstream_wiring_patch.py
 
