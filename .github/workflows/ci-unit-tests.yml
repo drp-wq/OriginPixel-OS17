@@ -32,16 +32,26 @@ jobs:
           java -version
           python3 --version
 
-      - name: Validate XML manifests, L1 design tokens & G3 fail-closed inspector
+      - name: Validate XML manifests, L1 design tokens, G3 inspector & CI smoke
         run: |
           python3 -c "import xml.etree.ElementTree as ET; ET.parse('manifests/originpixel_mustang.xml')"
           python3 tests/test_design_tokens.py
           python3 tests/test_g3_inspector.py
+          python3 -m pip install --user --disable-pip-version-check PyYAML==6.0.2
+          python3 tests/test_ci_smoke.py
 
-      - name: Compile and run SmartIsland contract & invariant tests
+      - name: Compile and run ALL SmartIsland modules & integration test suites
         run: |
           mkdir -p /tmp/op-ci-classes
           javac -d /tmp/op-ci-classes \
             systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandContract.java \
-            tests/SmartIslandContractTest.java
+            systemui/smartisland/com/originpixel/systemui/smartisland/SimulatedSystemUiAdapter.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandMotionSpec.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SmartIslandUiController.java \
+            systemui/smartisland/com/originpixel/systemui/smartisland/SystemUiIntegrationBoundaries.java \
+            tests/SmartIslandContractTest.java \
+            tests/SimulatedSystemUiAdapterTest.java \
+            tests/SmartIslandSystemUiIntegrationTest.java
           java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandContractTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SimulatedSystemUiAdapterTest
+          java -ea -cp /tmp/op-ci-classes com.originpixel.systemui.smartisland.SmartIslandSystemUiIntegrationTest
