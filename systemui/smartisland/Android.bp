@@ -11,6 +11,9 @@ java_library {
     srcs: [
         "com/originpixel/systemui/smartisland/SmartIslandContract.java",
         "com/originpixel/systemui/smartisland/SimulatedSystemUiAdapter.java",
+        "com/originpixel/systemui/smartisland/SmartIslandMotionSpec.java",
+        "com/originpixel/systemui/smartisland/SmartIslandUiController.java",
+        "com/originpixel/systemui/smartisland/SystemUiIntegrationBoundaries.java",
     ],
     sdk_version: "core_current",
     visibility: [
