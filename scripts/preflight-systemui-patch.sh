@@ -22,4 +22,4 @@ grep -q "public void start()" "$CS_FILE"
 echo "=== 3. Dry-Run Patch Check (packages/SystemUI/Android.bp) ==="
 git -C "${AOSP_ROOT}/frameworks/base" apply --check "$PATCH_FILE"
 
-echo "PASS: SystemUI source-tree preflight and patch dry-run succeeded."
+echo "PASS: SystemUI source-tree preflight and patch dry-run succeeded (PREFLIGHT ONLY — NOT A FULL SYSTEMUI COMPILATION)."
