@@ -1,0 +1,20 @@
+// OriginPixel OS 17 — Native SmartIsland Core Soong Build Definition
+// Target Baseline: LineageOS 24.0 (Android 17 / SDK 37, mustang)
+// Upstream SystemUI module verified: packages/SystemUI/Android.bp (SystemUI-core)
+
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+java_library {
+    name: "OriginPixelSmartIslandCore",
+    srcs: [
+        "com/originpixel/systemui/smartisland/SmartIslandContract.java",
+        "com/originpixel/systemui/smartisland/SimulatedSystemUiAdapter.java",
+    ],
+    sdk_version: "core_current",
+    visibility: [
+        "//frameworks/base/packages/SystemUI:__subpackages__",
+        "//vendor/originpixel:__subpackages__",
+    ],
+}

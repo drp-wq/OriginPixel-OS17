@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "baseline": "LineageOS 24.0 (lineage-24.0, Android 17 / SDK 37)",
+  "audit_note": "Direct HTTP check of LineageOS/android_frameworks_base@lineage-24.0 core/res/res/values/overlayable.xml returned HTTP 404 on 2026-11-22. Therefore, all prospective RRO targets remain UNVERIFIED_PENDING_G3_TREE until the full lineage-24.0 source tree is synced on the G2 build host.",
+  "mappings": [
+    {
+      "originpixel_token": "op_radius_card",
+      "value": "24dp",
+      "prospective_target_package": "android",
+      "prospective_target_resource": "config_dialogCornerRadius",
+      "rro_compatibility_status": "UNVERIFIED_PENDING_G3_TREE",
+      "verified_source_ref": null
+    },
+    {
+      "originpixel_token": "op_radius_tile",
+      "value": "18dp",
+      "prospective_target_package": "com.android.systemui",
+      "prospective_target_resource": "qs_corner_radius",
+      "rro_compatibility_status": "UNVERIFIED_PENDING_G3_TREE",
+      "verified_source_ref": null
+    },
+    {
+      "originpixel_token": "op_blur_glass_medium",
+      "value": "24dp",
+      "prospective_target_package": "com.android.systemui",
+      "prospective_target_resource": "max_window_blur_radius",
+      "rro_compatibility_status": "UNVERIFIED_PENDING_G3_TREE",
+      "verified_source_ref": null
+    },
+    {
+      "originpixel_token": "op_min_touch_target",
+      "value": "48dp",
+      "prospective_target_package": "com.android.systemui",
+      "prospective_target_resource": "min_clickable_item_size",
+      "rro_compatibility_status": "UNVERIFIED_PENDING_G3_TREE",
+      "verified_source_ref": null
+    }
+  ]
+}

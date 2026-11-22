@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  OriginPixel OS 17 — L1 Original Design System Tokens (Android Resource Overlay Spec)
+  Clean-room original tokens. Not yet bound to unverified SystemUI overlayable targets.
+-->
+<resources>
+    <!-- Corner Radii -->
+    <dimen name="op_radius_pill">999dp</dimen>
+    <dimen name="op_radius_sheet">32dp</dimen>
+    <dimen name="op_radius_card">24dp</dimen>
+    <dimen name="op_radius_tile">18dp</dimen>
+    <dimen name="op_radius_chip">12dp</dimen>
+
+    <!-- Spatial Grid (4dp base) -->
+    <dimen name="op_space_xs">4dp</dimen>
+    <dimen name="op_space_sm">8dp</dimen>
+    <dimen name="op_space_md">12dp</dimen>
+    <dimen name="op_space_lg">16dp</dimen>
+    <dimen name="op_space_xl">24dp</dimen>
+    <dimen name="op_space_xxl">32dp</dimen>
+
+    <!-- Blur Radii -->
+    <dimen name="op_blur_glass_low">12dp</dimen>
+    <dimen name="op_blur_glass_medium">24dp</dimen>
+    <dimen name="op_blur_glass_high">36dp</dimen>
+
+    <!-- Accessibility -->
+    <dimen name="op_min_touch_target">48dp</dimen>
+    <integer name="op_reduced_motion_crossfade_ms">120</integer>
+</resources>
