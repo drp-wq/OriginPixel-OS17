@@ -4,7 +4,7 @@ import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-ROOT = Path("/srv/originpixel-os17")
+ROOT = Path(__file__).resolve().parents[1]
 JSON_PATH = ROOT / "overlays/design-tokens/originpixel-tokens.json"
 XML_PATH = ROOT / "overlays/design-tokens/values/originpixel_tokens.xml"
 MAP_PATH = ROOT / "overlays/design-tokens/overlayable-map.json"

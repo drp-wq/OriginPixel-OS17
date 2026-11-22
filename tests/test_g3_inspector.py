@@ -6,7 +6,7 @@ import sys
 import tempfile
 from pathlib import Path
 
-SCRIPT = Path("/srv/originpixel-os17/scripts/inspect-g3-source-tree.py")
+SCRIPT = Path(__file__).resolve().parents[1] / "scripts/inspect-g3-source-tree.py"
 
 
 def run_inspector(root: Path):
